@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct Post {
+struct Post: Decodable {
     var text: String
     var username: String
-    var timestamp: TimeInterval
+    var timestamp: TimeInterval?
     
     init(text: String, username: String, timestamp: TimeInterval = Date().timeIntervalSince1970) {
         self.text = text
