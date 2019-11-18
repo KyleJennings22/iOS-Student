@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2792A6002383362600D94D88 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2792A5FF2383362600D94D88 /* Post.swift */; };
+		2792A603238336FB00D94D88 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2792A602238336FB00D94D88 /* PostController.swift */; };
 		B755BB7A219DE7EC00A9E085 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B755BB79219DE7EC00A9E085 /* AppDelegate.swift */; };
 		B755BB7C219DE7EC00A9E085 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B755BB7B219DE7EC00A9E085 /* ViewController.swift */; };
 		B755BB7F219DE7EC00A9E085 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B755BB7D219DE7EC00A9E085 /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2792A5FF2383362600D94D88 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		2792A602238336FB00D94D88 /* PostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		B755BB76219DE7EC00A9E085 /* Post.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Post.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B755BB79219DE7EC00A9E085 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B755BB7B219DE7EC00A9E085 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +39,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2792A5FE238335F300D94D88 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B755BB79219DE7EC00A9E085 /* AppDelegate.swift */,
+				B755BB7B219DE7EC00A9E085 /* ViewController.swift */,
+				B755BB80219DE7ED00A9E085 /* Assets.xcassets */,
+				B755BB82219DE7ED00A9E085 /* LaunchScreen.storyboard */,
+				B755BB85219DE7ED00A9E085 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2792A6012383362900D94D88 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2792A5FF2383362600D94D88 /* Post.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2792A604238336FE00D94D88 /* Model Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2792A602238336FB00D94D88 /* PostController.swift */,
+			);
+			path = "Model Controller";
+			sourceTree = "<group>";
+		};
 		B755BB6D219DE7EC00A9E085 = {
 			isa = PBXGroup;
 			children = (
@@ -54,12 +86,10 @@
 		B755BB78219DE7EC00A9E085 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				B755BB79219DE7EC00A9E085 /* AppDelegate.swift */,
-				B755BB7B219DE7EC00A9E085 /* ViewController.swift */,
+				2792A5FE238335F300D94D88 /* Resources */,
 				B755BB7D219DE7EC00A9E085 /* Main.storyboard */,
-				B755BB80219DE7ED00A9E085 /* Assets.xcassets */,
-				B755BB82219DE7ED00A9E085 /* LaunchScreen.storyboard */,
-				B755BB85219DE7ED00A9E085 /* Info.plist */,
+				2792A6012383362900D94D88 /* Model */,
+				2792A604238336FE00D94D88 /* Model Controller */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -96,6 +126,7 @@
 				TargetAttributes = {
 					B755BB75219DE7EC00A9E085 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1120;
 					};
 				};
 			};
@@ -135,6 +166,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2792A6002383362600D94D88 /* Post.swift in Sources */,
+				2792A603238336FB00D94D88 /* PostController.swift in Sources */,
 				B755BB7C219DE7EC00A9E085 /* ViewController.swift in Sources */,
 				B755BB7A219DE7EC00A9E085 /* AppDelegate.swift in Sources */,
 			);
@@ -283,14 +316,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Post/Info.plist;
+				INFOPLIST_FILE = Post/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.DevMtnStudent.Post;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -300,14 +333,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Post/Info.plist;
+				INFOPLIST_FILE = Post/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.DevMtnStudent.Post;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
