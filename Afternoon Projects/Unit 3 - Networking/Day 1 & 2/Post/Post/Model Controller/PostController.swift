@@ -13,9 +13,23 @@ class PostController {
     
     var posts: [Post] = []
     
-    func fetchPosts(completion: @escaping (Result<[Post], PostError>) -> Void) {
+    func fetchPosts(reset: Bool = true, completion: @escaping (Result<[Post], PostError>) -> Void) {
+        let queryEndInterval = reset ? Date().timeIntervalSince1970 : posts.last?.queryTimestamp ?? Date().timeIntervalSince1970
         let baseURL = URL(string: "http://devmtn-posts.firebaseio.com/posts")
-        guard let url = baseURL else {return completion(.failure(.invalidURL))}
+        guard let theURL = baseURL else {return completion(.failure(.invalidURL))}
+        
+        let urlParameters = [
+        "orderBy": "\"timestamp\"",
+        "endAt": "\(queryEndInterval)",
+        "limitToLast": "15",
+        ]
+        
+        let queryItems = urlParameters.compactMap( { URLQueryItem(name: $0.key, value: $0.value) } )
+        
+        var urlComponents = URLComponents(url: theURL, resolvingAgainstBaseURL: true)
+        urlComponents?.queryItems = queryItems
+        
+        guard let url = urlComponents?.url else {return completion(.failure(.invalidURL))}
         
         let getterEndpoint = url.appendingPathExtension("json")
         
@@ -33,7 +47,12 @@ class PostController {
             do {
                 let postsDictionary = try decoder.decode([String:Post].self, from: data)
                 let posts = postsDictionary.compactMap({$0.value})
-                self.posts = posts
+                if reset {
+                    self.posts = posts
+                } else {
+                    self.posts.append(contentsOf: posts)
+                }
+                
                 return completion(.success(posts))
             } catch {
                 print(error, error.localizedDescription)
