@@ -26,8 +26,11 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.dataSource = self
         refreshControl.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
         getPosts()
-        
-        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    // MARK: - ACTIONS
+    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        presentNewPostAlert()
     }
     
     // MARK: - TABLE VIEW FUNCTIONS
@@ -66,6 +69,35 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
             self.tableView.reloadData()
             self.refreshControl.endRefreshing()
         }
+    }
+    
+    func presentNewPostAlert() {
+        let alertController = UIAlertController(title: "New Post", message: "Please enter a new post", preferredStyle: .alert)
+        alertController.addTextField { (messageTextField) in
+            messageTextField.layer.borderWidth = 1
+            messageTextField.placeholder = "Enter message"
+        }
+        alertController.addTextField { (usernameTextField) in
+            usernameTextField.layer.borderWidth = 1
+            usernameTextField.placeholder = "Enter username"
+        }
+        let submit = UIAlertAction(title: "Submit", style: .default) { (_) in
+            guard let username = alertController.textFields?[1].text, let text = alertController.textFields?[0].text, !username.isEmpty, !text.isEmpty else {return}
+            self.postController.addNewPostWith(username: username, text: text) { (results) in
+                switch results {
+                case .success(_):
+                    print("success")
+                    self.tableView.reloadData()
+                case .failure(_):
+                    print("fail")
+                }
+            }
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(submit)
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true)
     }
 }// end of class
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Post: Decodable {
+struct Post: Codable {
     var text: String
     var username: String
     var timestamp: TimeInterval?

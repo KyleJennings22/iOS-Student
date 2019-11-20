@@ -41,7 +41,36 @@ class PostController {
             }
         }.resume()
     }
-}
+    
+    func addNewPostWith(username: String, text: String, completion: @escaping (Result<Post, PostError>) -> Void) {
+        let post = Post(text: text, username: username)
+        var postData: Data?
+        do {
+            postData = try JSONEncoder().encode(post)
+        } catch {
+            print(error)
+        }
+        let baseURL = URL(string: "http://devmtn-posts.firebaseio.com/posts")
+        guard let url = baseURL else {return completion(.failure(.invalidURL))}
+        let postEndpoint = url.appendingPathExtension("json")
+        
+        var request = URLRequest(url: postEndpoint)
+        request.httpMethod = "POST"
+        request.httpBody = postData
+        
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                print(error)
+                completion(.failure(.communicationError))
+            }
+            guard let data = data else {return completion(.failure(.noData))}
+            if let dataAsString = String(data: data, encoding: .utf8) {
+                print(dataAsString)
+            }
+        }.resume()
+    }
+    
+}// end of class
 
 enum PostError: LocalizedError {
     case invalidURL
